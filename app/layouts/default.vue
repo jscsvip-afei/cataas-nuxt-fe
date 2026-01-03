@@ -12,10 +12,15 @@
       <!-- Desktop Menu -->
       <div class="flex-none hidden md:block">
         <ul class="menu menu-horizontal gap-1">
-          <li><NuxtLink to="/" class="btn btn-ghost btn-sm">{{ t('home') }}</NuxtLink></li>
-          <li><NuxtLink to="/gallery" class="btn btn-ghost btn-sm">{{ t('gallery') }}</NuxtLink></li>
-          <li><NuxtLink to="/generator" class="btn btn-ghost btn-sm">{{ t('generator') }}</NuxtLink></li>
+          <li><NuxtLink to="/" class="btn btn-ghost btn-sm" active-class="" exact-active-class="btn-active">{{ t('home') }}</NuxtLink></li>
+          <li><NuxtLink to="/gallery" class="btn btn-ghost btn-sm" active-class="btn-active">{{ t('gallery') }}</NuxtLink></li>
+          <li><NuxtLink to="/generator" class="btn btn-ghost btn-sm" active-class="btn-active">{{ t('generator') }}</NuxtLink></li>
         </ul>
+      </div>
+      
+      <!-- Theme Toggle -->
+      <div class="flex-none">
+        <ThemeToggle />
       </div>
       
       <!-- Language Toggle -->
@@ -23,11 +28,7 @@
         <LanguageToggle />
       </div>
 
-      <!-- Theme Toggle -->
-      <div class="flex-none">
-        <ThemeToggle />
-      </div>
-      
+    
       <!-- Mobile Menu -->
       <div class="flex-none md:hidden">
         <div class="dropdown dropdown-end">
@@ -37,9 +38,9 @@
             </svg>
           </div>
           <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-40">
-            <li><NuxtLink to="/">{{ t('home') }}</NuxtLink></li>
-            <li><NuxtLink to="/gallery">{{ t('gallery') }}</NuxtLink></li>
-            <li><NuxtLink to="/generator">{{ t('generator') }}</NuxtLink></li>
+            <li><NuxtLink to="/" active-class="" exact-active-class="active">{{ t('home') }}</NuxtLink></li>
+            <li><NuxtLink to="/gallery" active-class="active">{{ t('gallery') }}</NuxtLink></li>
+            <li><NuxtLink to="/generator" active-class="active">{{ t('generator') }}</NuxtLink></li>
           </ul>
         </div>
       </div>

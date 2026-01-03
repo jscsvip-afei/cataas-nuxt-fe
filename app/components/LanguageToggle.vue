@@ -9,7 +9,7 @@
     <ul tabindex="0" class="dropdown-content z-[1] p-2 shadow-2xl bg-base-200 rounded-box w-32">
       <li>
         <button 
-          class="btn btn-sm btn-ghost justify-start" 
+          class="btn btn-sm btn-ghost btn-block justify-start" 
           :class="{ 'btn-active': locale === 'zh' }"
           @click="setLocale('zh')"
         >
@@ -18,7 +18,7 @@
       </li>
       <li>
         <button 
-          class="btn btn-sm btn-ghost justify-start" 
+          class="btn btn-sm btn-ghost btn-block justify-start" 
           :class="{ 'btn-active': locale === 'en' }"
           @click="setLocale('en')"
         >
