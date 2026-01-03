@@ -1,10 +1,9 @@
 <template>
   <div class="min-h-screen bg-base-200">
     <!-- Hero Section -->
-    <div class="hero bg-gradient-to-br from-primary to-secondary text-primary-content py-10">
+    <div class="hero bg-gradient-to-br from-primary to-secondary text-primary-content">
       <div class="hero-content text-center">
         <div class="max-w-2xl">
-          <h1 class="text-5xl font-bold">获取随机猫咪图片</h1>
           
           <!-- Stats in Hero -->
           <div class="stats stats-horizontal bg-primary-content/10 backdrop-blur-sm shadow mt-6">
@@ -37,34 +36,24 @@
 
     <!-- Main Content -->
     <div class="container mx-auto px-4 py-8">
-      <!-- Quick Tag Cats -->
-      <div class="card bg-base-100 shadow-xl mb-8">
-        <div class="card-body">
-          <h2 class="card-title text-xl mb-4">🏷️ 按标签获取猫咪</h2>
-          <div class="flex flex-wrap gap-2">
-            <button 
-              v-for="tag in quickTags" 
-              :key="tag"
-              class="btn btn-sm btn-outline"
-              :class="{ 'btn-primary': selectedTag === tag }"
-              @click="getRandomCatByTag(tag)"
-              :disabled="loading"
-            >
-              {{ tag }}
-            </button>
-          </div>
-        </div>
-      </div>
+  
 
       <!-- Random Cat Section -->
       <div class="card bg-base-100 shadow-xl mb-8">
         <div class="card-body">
-          <div class="flex justify-center items-center mb-4">
-            <h2 class="card-title text-2xl">🎲 随机猫咪</h2>
-            <span v-if="selectedTag" class="badge badge-primary ml-2">{{ selectedTag }}</span>
-          </div>
+          
           
           <div class="flex justify-center items-center min-h-80 bg-base-200 rounded-lg p-4 relative">
+            <!-- Action buttons in top right -->
+            <div class="absolute top-2 right-2 flex gap-1 z-10" v-if="currentCatUrl">
+              <button class="btn btn-sm btn-ghost bg-base-100/80 hover:bg-base-100" @click="copyUrl">
+                📋 复制链接
+              </button>
+              <a :href="currentCatUrl" target="_blank" class="btn btn-sm btn-ghost bg-base-100/80 hover:bg-base-100">
+                🔗 新窗口打开
+              </a>
+            </div>
+            
             <span v-if="loading" class="loading loading-spinner loading-lg text-primary absolute"></span>
             <img 
               v-show="currentCatUrl"
@@ -94,14 +83,23 @@
               </span>
             </div>
           </div>
-
-          <div class="flex justify-center gap-2 mt-2" v-if="currentCatUrl">
-            <button class="btn btn-sm btn-ghost" @click="copyUrl">
-              📋 复制链接
+        </div>
+      </div>
+      <!-- Quick Tag Cats -->
+      <div class="card bg-base-100 shadow-xl mb-8">
+        <div class="card-body">
+          <h2 class="card-title text-xl mb-4">🏷️ 按标签获取猫咪</h2>
+          <div class="flex flex-wrap gap-2">
+            <button 
+              v-for="tag in quickTags" 
+              :key="tag"
+              class="btn btn-sm btn-outline"
+              :class="{ 'btn-primary': selectedTag === tag }"
+              @click="getRandomCatByTag(tag)"
+              :disabled="loading"
+            >
+              {{ tag }}
             </button>
-            <a :href="currentCatUrl" target="_blank" class="btn btn-sm btn-ghost">
-              🔗 新窗口打开
-            </a>
           </div>
         </div>
       </div>

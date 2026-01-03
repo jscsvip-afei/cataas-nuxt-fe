@@ -15,7 +15,7 @@
 
             <!-- Basic Options -->
             <div class="collapse collapse-arrow bg-base-200 mb-2">
-              <input type="checkbox" checked /> 
+              <input type="checkbox" /> 
               <div class="collapse-title font-medium">
                 基础设置
               </div>
@@ -69,7 +69,7 @@
 
             <!-- Tag Selection -->
             <div class="collapse collapse-arrow bg-base-200 mb-2">
-              <input type="checkbox" checked /> 
+              <input type="checkbox" /> 
               <div class="collapse-title font-medium">
                 标签选择
               </div>
@@ -157,7 +157,7 @@
 
             <!-- Text Overlay -->
             <div class="collapse collapse-arrow bg-base-200 mb-2">
-              <input type="checkbox" /> 
+              <input type="checkbox" checked /> 
               <div class="collapse-title font-medium">
                 文字叠加
               </div>
@@ -190,18 +190,18 @@
                     <label class="label">
                       <span class="label-text">字体颜色</span>
                     </label>
-                    <div class="flex gap-2 items-center">
-                      <input 
-                        v-model="options.fontColor" 
-                        type="color" 
-                        class="w-10 h-10 rounded cursor-pointer"
-                      />
-                      <input 
-                        v-model="options.fontColor" 
-                        type="text" 
-                        class="input input-bordered input-sm flex-1"
-                      />
-                    </div>
+                    <select v-model="options.fontColor" class="select select-bordered select-sm">
+                      <option value="black">⬛ 黑色 (black)</option>
+                      <option value="white">⬜ 白色 (white)</option>
+                      <option value="red">🟥 红色 (red)</option>
+                      <option value="orange">🟧 橙色 (orange)</option>
+                      <option value="yellow">🟨 黄色 (yellow)</option>
+                      <option value="green">🟩 绿色 (green)</option>
+                      <option value="blue">🟦 蓝色 (blue)</option>
+                      <option value="purple">🟪 紫色 (purple)</option>
+                      <option value="pink">💗 粉色 (pink)</option>
+                      <option value="cyan">🩵 青色 (cyan)</option>
+                    </select>
                   </div>
                 </div>
               </div>
@@ -344,7 +344,7 @@ const options = reactive<GeneratorOptions>({
   hue: 0,
   text: '',
   fontSize: 30,
-  fontColor: '#ffffff'
+  fontColor: 'black'
 })
 
 const availableTags = ref<string[]>([])
@@ -396,7 +396,7 @@ const buildUrl = () => {
   }
   if (options.text) {
     params.append('fontSize', options.fontSize.toString())
-    params.append('fontColor', options.fontColor.replace('#', ''))
+    params.append('fontColor', options.fontColor)
   }
   
   params.append('t', Date.now().toString())
@@ -448,7 +448,7 @@ const resetOptions = () => {
   options.hue = 0
   options.text = ''
   options.fontSize = 30
-  options.fontColor = '#ffffff'
+  options.fontColor = 'white'
 }
 
 const randomize = () => {
