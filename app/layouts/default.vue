@@ -5,7 +5,7 @@
       <!-- Logo -->
       <div class="flex-1">
         <NuxtLink to="/" class="btn btn-ghost text-xl">
-          🐱 哈基米
+          🐱 哈基米南北Look 
         </NuxtLink>
       </div>
       

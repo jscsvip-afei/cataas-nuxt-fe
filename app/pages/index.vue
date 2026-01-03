@@ -3,15 +3,34 @@
     <!-- Hero Section -->
     <div class="hero bg-gradient-to-br from-primary to-secondary text-primary-content py-10">
       <div class="hero-content text-center">
-        <div class="max-w-md">
+        <div class="max-w-2xl">
           <h1 class="text-5xl font-bold">获取随机猫咪图片</h1>
-          <p class="py-2 text-lg" v-if="totalCats">
-            🐱 已收录 <span class="font-bold text-2xl">{{ totalCats.toLocaleString() }}</span> 只猫咪
-          </p>
-          <button class="btn btn-primary mt-4" @click="getRandomCat" :disabled="loading">
-            <span v-if="loading" class="loading loading-spinner loading-sm"></span>
-            给我一只哈基米
-          </button>
+          
+          <!-- Stats in Hero -->
+          <div class="stats stats-horizontal bg-primary-content/10 backdrop-blur-sm shadow mt-6">
+            <div class="stat px-6 py-3">
+              <div class="stat-title text-primary-content/70">🐱 总猫咪数</div>
+              <div class="stat-value text-primary-content text-2xl">{{ totalCats?.toLocaleString() || '-' }}</div>
+            </div>
+            <div class="stat px-6 py-3">
+              <div class="stat-title text-primary-content/70">🏷️ 标签数量</div>
+              <div class="stat-value text-primary-content text-2xl">{{ totalTags || '-' }}</div>
+            </div>
+            <div class="stat px-6 py-3">
+              <div class="stat-title text-primary-content/70">🎨 API 端点</div>
+              <div class="stat-value text-primary-content text-2xl">9</div>
+            </div>
+          </div>
+
+          <div class="flex justify-center gap-3 mt-6">
+            <button class="btn btn-primary" @click="getRandomCat" :disabled="loading">
+              <span v-if="loading" class="loading loading-spinner loading-sm"></span>
+              🎲 给我一只哈基米
+            </button>
+            <NuxtLink to="/generator" class="btn btn-secondary">
+              🎨 生成器
+            </NuxtLink>
+          </div>
         </div>
       </div>
     </div>
@@ -84,36 +103,6 @@
               🔗 新窗口打开
             </a>
           </div>
-        </div>
-      </div>
-
-      <!-- API Stats -->
-      <div class="stats shadow w-full bg-base-100">
-        <div class="stat">
-          <div class="stat-figure text-primary">
-            <span class="text-3xl">🐱</span>
-          </div>
-          <div class="stat-title">总猫咪数</div>
-          <div class="stat-value text-primary">{{ totalCats?.toLocaleString() || '-' }}</div>
-          <div class="stat-desc">来自 cataas.com</div>
-        </div>
-        
-        <div class="stat">
-          <div class="stat-figure text-secondary">
-            <span class="text-3xl">🏷️</span>
-          </div>
-          <div class="stat-title">标签数量</div>
-          <div class="stat-value text-secondary">{{ totalTags || '-' }}</div>
-          <div class="stat-desc">可用于筛选</div>
-        </div>
-        
-        <div class="stat">
-          <div class="stat-figure text-accent">
-            <span class="text-3xl">🎨</span>
-          </div>
-          <div class="stat-title">API 端点</div>
-          <div class="stat-value text-accent">9</div>
-          <div class="stat-desc">完整功能支持</div>
         </div>
       </div>
     </div>
