@@ -55,7 +55,7 @@
     <footer class="footer footer-center p-10 bg-base-200 text-base-content">
       <aside>
         <p>{{ t('footerText') }}</p>
-        <p>{{ t('copyright') }}</p>
+        <p>使用 <a href="https://nuxt.com" target="_blank" class="link link-secondary">Nuxt</a> + <a href="https://daisyui.com" target="_blank" class="link link-accent">DaisyUI</a></p>
       </aside>
     </footer>
   </div>
