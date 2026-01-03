@@ -5,19 +5,24 @@
       <!-- Logo -->
       <div class="flex-1">
         <NuxtLink to="/" class="btn btn-ghost text-xl">
-          🐱 哈基米南北Look 
+          🐱 {{ t('appTitle') }}
         </NuxtLink>
       </div>
       
       <!-- Desktop Menu -->
       <div class="flex-none hidden md:block">
         <ul class="menu menu-horizontal gap-1">
-          <li><NuxtLink to="/" class="btn btn-ghost btn-sm">首页</NuxtLink></li>
-          <li><NuxtLink to="/gallery" class="btn btn-ghost btn-sm">图库</NuxtLink></li>
-          <li><NuxtLink to="/generator" class="btn btn-ghost btn-sm">生成器</NuxtLink></li>
+          <li><NuxtLink to="/" class="btn btn-ghost btn-sm">{{ t('home') }}</NuxtLink></li>
+          <li><NuxtLink to="/gallery" class="btn btn-ghost btn-sm">{{ t('gallery') }}</NuxtLink></li>
+          <li><NuxtLink to="/generator" class="btn btn-ghost btn-sm">{{ t('generator') }}</NuxtLink></li>
         </ul>
       </div>
       
+      <!-- Language Toggle -->
+      <div class="flex-none">
+        <LanguageToggle />
+      </div>
+
       <!-- Theme Toggle -->
       <div class="flex-none">
         <ThemeToggle />
@@ -32,9 +37,9 @@
             </svg>
           </div>
           <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-40">
-            <li><NuxtLink to="/">首页</NuxtLink></li>
-            <li><NuxtLink to="/gallery">图库</NuxtLink></li>
-            <li><NuxtLink to="/generator">生成器</NuxtLink></li>
+            <li><NuxtLink to="/">{{ t('home') }}</NuxtLink></li>
+            <li><NuxtLink to="/gallery">{{ t('gallery') }}</NuxtLink></li>
+            <li><NuxtLink to="/generator">{{ t('generator') }}</NuxtLink></li>
           </ul>
         </div>
       </div>
@@ -48,9 +53,13 @@
     <!-- Footer -->
     <footer class="footer footer-center p-10 bg-base-200 text-base-content">
       <aside>
-        <p>基于 <a href="https://cataas.com" target="_blank" class="link link-primary">CATAAS API</a> 构建</p>
-        <p>使用 <a href="https://nuxt.com" target="_blank" class="link link-secondary">Nuxt</a> + <a href="https://daisyui.com" target="_blank" class="link link-accent">DaisyUI</a></p>
+        <p>{{ t('footerText') }}</p>
+        <p>{{ t('copyright') }}</p>
       </aside>
     </footer>
   </div>
 </template>
+
+<script setup lang="ts">
+const { t } = useLanguage()
+</script>

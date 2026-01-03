@@ -8,15 +8,15 @@
           <!-- Stats in Hero -->
           <div class="stats stats-horizontal bg-primary-content/10 backdrop-blur-sm shadow mt-6">
             <div class="stat px-6 py-3">
-              <div class="stat-title text-primary-content/70">🐱 总猫咪数</div>
+              <div class="stat-title text-primary-content/70">🐱 {{ t('totalCats') }}</div>
               <div class="stat-value text-primary-content text-2xl">{{ totalCats?.toLocaleString() || '-' }}</div>
             </div>
             <div class="stat px-6 py-3">
-              <div class="stat-title text-primary-content/70">🏷️ 标签数量</div>
+              <div class="stat-title text-primary-content/70">🏷️ {{ t('totalTags') }}</div>
               <div class="stat-value text-primary-content text-2xl">{{ totalTags || '-' }}</div>
             </div>
             <div class="stat px-6 py-3">
-              <div class="stat-title text-primary-content/70">🎨 API 端点</div>
+              <div class="stat-title text-primary-content/70">🎨 {{ t('apiEndpoints') }}</div>
               <div class="stat-value text-primary-content text-2xl">9</div>
             </div>
           </div>
@@ -24,10 +24,10 @@
           <div class="flex justify-center gap-3 mt-6">
             <button class="btn btn-primary" @click="getRandomCat" :disabled="loading">
               <span v-if="loading" class="loading loading-spinner loading-sm"></span>
-              🎲 给我一只哈基米
+              🎲 {{ t('getRandomCat') }}
             </button>
             <NuxtLink to="/generator" class="btn btn-secondary">
-              🎨 生成器
+              🎨 {{ t('generator') }}
             </NuxtLink>
           </div>
         </div>
@@ -47,10 +47,10 @@
             <!-- Action buttons in top right -->
             <div class="absolute top-2 right-2 flex gap-1 z-10" v-if="currentCatUrl">
               <button class="btn btn-sm btn-ghost bg-base-100/80 hover:bg-base-100" @click="copyUrl">
-                📋 复制链接
+                📋 {{ t('copyLink') }}
               </button>
               <a :href="currentCatUrl" target="_blank" class="btn btn-sm btn-ghost bg-base-100/80 hover:bg-base-100">
-                🔗 新窗口打开
+                🔗 {{ t('openInNewTab') }}
               </a>
             </div>
             
@@ -66,7 +66,7 @@
             />
             <div v-if="!currentCatUrl && !loading" class="text-center text-base-content/60">
               <p class="text-6xl mb-4">🐱</p>
-              <p>点击按钮获取随机猫咪</p>
+              <p>{{ t('clickToGetCat') }}</p>
             </div>
           </div>
 
@@ -88,7 +88,7 @@
       <!-- Quick Tag Cats -->
       <div class="card bg-base-100 shadow-xl mb-8">
         <div class="card-body">
-          <h2 class="card-title text-xl mb-4">🏷️ 按标签获取猫咪</h2>
+          <h2 class="card-title text-xl mb-4">🏷️ {{ t('catsByTag') }}</h2>
           <div class="flex flex-wrap gap-2">
             <button 
               v-for="tag in quickTags" 
@@ -115,6 +115,8 @@
 </template>
 
 <script setup lang="ts">
+const { t } = useLanguage()
+
 interface CatInfo {
   _id?: string
   id?: string
@@ -195,7 +197,7 @@ const getRandomCatByTag = async (tag: string) => {
     }
   } catch (error) {
     console.error('Failed to fetch cat by tag:', error)
-    showToast('获取猫咪失败，请重试', 'alert-error')
+    showToast(t('fetchCatError'), 'alert-error')
     loading.value = false
   }
 }
@@ -206,15 +208,15 @@ const onImageLoad = () => {
 
 const onImageError = () => {
   loading.value = false
-  showToast('图片加载失败，请重试', 'alert-error')
+  showToast(t('imageLoadError'), 'alert-error')
 }
 
 const copyUrl = async () => {
   try {
     await navigator.clipboard.writeText(currentCatUrl.value)
-    showToast('链接已复制', 'alert-success')
+    showToast(t('copySuccess'), 'alert-success')
   } catch {
-    showToast('复制失败', 'alert-error')
+    showToast(t('copyError'), 'alert-error')
   }
 }
 
