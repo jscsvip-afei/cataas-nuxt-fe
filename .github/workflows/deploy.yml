@@ -18,7 +18,7 @@ jobs:
       - run: npm install
       - run: npx nuxt build --preset github_pages
         env:
-          NUXT_APP_BASE_URL: /pokeapi-nuxt-fe/
+          NUXT_APP_BASE_URL: /cataas-nuxt-fe/
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
