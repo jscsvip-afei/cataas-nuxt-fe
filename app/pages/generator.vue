@@ -4,7 +4,7 @@
       <!-- Header -->
       <div class="text-center mb-8">
         <h1 class="text-4xl font-bold mb-2">🎨 猫咪生成器</h1>
-        <p class="text-base-content/60">创建自定义猫咪图片</p>
+        <p class="text-base-content/60">创建自定义猫咪图片 - 支持文字叠加、滤镜、尺寸调整</p>
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">

@@ -5,6 +5,9 @@
       <div class="text-center mb-8">
         <h1 class="text-4xl font-bold mb-2">📸 猫咪图库</h1>
         <p class="text-base-content/60">浏览所有可爱的猫咪</p>
+        <p class="text-sm text-base-content/40 mt-1" v-if="totalCount !== null">
+          共 {{ totalCount.toLocaleString() }} 只猫咪
+        </p>
       </div>
 
       <!-- Filters -->
@@ -232,9 +235,11 @@ const pageSize = ref(24)
 const selectedCat = ref<Cat | null>(null)
 const modalRef = ref<HTMLDialogElement | null>(null)
 const modalImageLoading = ref(false)
+const totalCount = ref<number | null>(null)
 
 const loadTags = async () => {
   try {
+    // GET /api/tags
     const response = await fetch('https://cataas.com/api/tags')
     availableTags.value = await response.json()
   } catch (error) {
@@ -242,9 +247,21 @@ const loadTags = async () => {
   }
 }
 
+const loadCount = async () => {
+  try {
+    // GET /api/count
+    const response = await fetch('https://cataas.com/api/count')
+    const data = await response.json()
+    totalCount.value = data.count || data
+  } catch (error) {
+    console.error('Failed to load count:', error)
+  }
+}
+
 const loadCats = async () => {
   loading.value = true
   try {
+    // GET /api/cats?tags=tag1,tag2&skip=0&limit=10
     const params = new URLSearchParams({
       limit: pageSize.value.toString(),
       skip: (currentPage.value * pageSize.value).toString()
@@ -315,6 +332,7 @@ const copyImageUrl = async () => {
 
 onMounted(() => {
   loadTags()
+  loadCount()
   loadCats()
 })
 
