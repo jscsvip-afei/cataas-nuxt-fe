@@ -16,7 +16,8 @@
               <label class="label">
                 <span class="label-text">标签筛选</span>
               </label>
-              <select v-model="selectedTags" multiple class="select select-bordered w-full h-24">
+              <select class="select select-bordered w-full" @change="onTagSelect">
+                <option value="" disabled selected>选择标签...</option>
                 <option v-for="tag in availableTags" :key="tag" :value="tag">{{ tag }}</option>
               </select>
             </div>
@@ -144,11 +145,17 @@
           </form>
           
           <div v-if="selectedCat" class="flex flex-col items-center">
-            <img 
-              :src="`https://cataas.com/cat/${getCatId(selectedCat)}`" 
-              :alt="selectedCat.tags?.join(', ')"
-              class="max-h-96 object-contain rounded-lg mb-4"
-            />
+            <div class="relative min-h-48 flex justify-center items-center w-full mb-4">
+              <span v-if="modalImageLoading" class="loading loading-spinner loading-lg text-primary absolute"></span>
+              <img 
+                v-show="!modalImageLoading"
+                :src="`https://cataas.com/cat/${getCatId(selectedCat)}`" 
+                :alt="selectedCat.tags?.join(', ')"
+                class="max-h-96 object-contain rounded-lg"
+                @load="modalImageLoading = false"
+                @error="modalImageLoading = false"
+              />
+            </div>
             
             <div class="w-full">
               <h3 class="font-bold text-lg mb-2">猫咪详情</h3>
@@ -224,6 +231,7 @@ const currentPage = ref(0)
 const pageSize = ref(24)
 const selectedCat = ref<Cat | null>(null)
 const modalRef = ref<HTMLDialogElement | null>(null)
+const modalImageLoading = ref(false)
 
 const loadTags = async () => {
   try {
@@ -266,6 +274,15 @@ const resetFilters = () => {
   loadCats()
 }
 
+const onTagSelect = (event: Event) => {
+  const select = event.target as HTMLSelectElement
+  const tag = select.value
+  if (tag && !selectedTags.value.includes(tag)) {
+    selectedTags.value.push(tag)
+  }
+  select.value = ''
+}
+
 const removeTag = (tag: string) => {
   selectedTags.value = selectedTags.value.filter(t => t !== tag)
 }
@@ -276,8 +293,13 @@ const goToPage = (page: number) => {
 }
 
 const openModal = (cat: Cat) => {
-  selectedCat.value = cat
-  modalRef.value?.showModal()
+  selectedCat.value = null // Clear previous cat to ensure clean state
+  modalImageLoading.value = true
+  // Use nextTick to ensure DOM updates before setting new cat
+  nextTick(() => {
+    selectedCat.value = cat
+    modalRef.value?.showModal()
+  })
 }
 
 const copyImageUrl = async () => {

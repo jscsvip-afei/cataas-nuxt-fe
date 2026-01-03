@@ -4,11 +4,10 @@
     <div class="hero bg-gradient-to-br from-primary to-secondary text-primary-content py-10">
       <div class="hero-content text-center">
         <div class="max-w-md">
-          <h1 class="text-5xl font-bold">🐱 哈基米</h1>
-          <p class="py-3">获取随机可爱猫咪图片</p>
+          <h1 class="text-5xl font-bold">获取随机猫咪图片</h1>
           <button class="btn btn-primary mt-4" @click="getRandomCat" :disabled="loading">
             <span v-if="loading" class="loading loading-spinner loading-sm"></span>
-            换一只
+            给我一只哈基米
           </button>
         </div>
       </div>
@@ -120,4 +119,7 @@ const showToast = (message: string, type = 'alert-info') => {
   }, 2000)
 }
 
+onMounted(() => {
+  getRandomCat()
+})
 </script>
