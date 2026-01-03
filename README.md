@@ -1,6 +1,6 @@
 # 🐱 哈基米南北Look - 猫咪图片生成网站
 
-一个基于 [CATAAS (Cat as a Service)](https://cataas.com) API 的可爱猫咪图片生成网站，使用 Nuxt 3 + DaisyUI 构建。
+一个基于 [CATAAS (Cat as a Service)](https://cataas.com) API 的可爱猫咪图片生成网站，使用 Nuxt 4 + DaisyUI 构建。
 
 ![Nuxt](https://img.shields.io/badge/Nuxt-3.x-00DC82?style=flat-square&logo=nuxt.js)
 ![Vue](https://img.shields.io/badge/Vue-3.x-4FC08D?style=flat-square&logo=vue.js)
@@ -15,11 +15,17 @@
 - 显示猫咪总数和标签统计
 - 复制链接 / 新窗口打开
 
+![首页](screenshots/1.png)
+
 ### 📸 图库 - 猫咪浏览
 - 分页浏览所有猫咪图片
 - 下拉框标签筛选（支持多选）
 - 点击查看猫咪详情弹窗
 - 图片加载状态显示
+
+![图库](screenshots/2.png)
+![图库详情](screenshots/3.png)
+
 
 ### 🎨 生成器 - 自定义猫咪
 - **基础设置**：图片类型（正方形/中等/小图）、格式（图片/GIF）、自定义尺寸
@@ -28,10 +34,13 @@
 - **文字叠加**：自定义文字内容、字体大小、字体颜色
 - 历史记录保存
 - 一键复制 URL / 下载图片
+![生成器](screenshots/4.png)
+
 
 ### 🌓 主题切换
 - 支持深色/浅色主题切换
 - 主题偏好本地存储
+
 
 ## 🔌 API 端点
 
@@ -51,7 +60,7 @@
 
 ## 🛠️ 技术栈
 
-- **框架**: [Nuxt 3](https://nuxt.com/)
+- **框架**: [Nuxt 4](https://nuxt.com/)
 - **UI 组件**: [DaisyUI](https://daisyui.com/)
 - **样式**: [Tailwind CSS](https://tailwindcss.com/)
 - **语言**: TypeScript
